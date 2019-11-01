@@ -20,11 +20,11 @@ if "PATH_INFO" in os.environ:
         if pathinfo == "/form":
             print('This is a form' )
             form=cgi.FieldStorage()
-            sql_variable=form.getvalue('variable')
-            db = MySQLdb.connect('lab4.cixhqu4w47kx.us-east-1.rds.amazonaws.com', 'fakeuser', 'fakepassword', 'dogs')
+            sql_variable=form.getvalue("dog")
+            db = MySQLdb.connect('lab4.cixhqu4w47kx.us-east-1.rds.amazonaws.com', 'masteruser', 'Madeuppassword', 'dogs')
             cursor=db.cursor()
-            sql = "INSERT INTO dogs (name) VALUES (%s)"
-            cursor.execute(sql,sql_variable)
+            sql = "INSERT INTO dogs (name) VALUES ("+"'"+sql_variable+"'"+")"
+            cursor.execute(sql)
             db.commit()
             db.close()
             new_id = cursor.lastrowid
